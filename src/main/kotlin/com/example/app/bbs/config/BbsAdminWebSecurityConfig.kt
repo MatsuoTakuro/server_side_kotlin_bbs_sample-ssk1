@@ -24,17 +24,12 @@ class BbsAdminWebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Override
     override fun configure(auth: AuthenticationManagerBuilder) {
-        val password: String =passwordEncoder.encode("root")
 
         auth.inMemoryAuthentication()
             .withUser("admin")
-            .password(password)
-//            .password(
-//                "\$2a\$10\$qHwwgwxqm5Od7dSdeIE4wu3lhLbA3xicU3IwPGQWsCxBu13vit7FK" // "$"に関してコンパイルエラーが出る場合は、直前に"\"を足してエスケープしても問題ない
-//            )
+            .password(
+                "\$2a\$10\$qHwwgwxqm5Od7dSdeIE4wu3lhLbA3xicU3IwPGQWsCxBu13vit7FK" // "$"に関してコンパイルエラーが出る場合は、直前に"\"を足してエスケープしても問題ない
+            )
             .authorities("ROLE_ADMIN")
-
-        println(password)
-//      logに出力された値： \$2a\$10$qHwwgwxqm5Od7dSdeIE4wu3lhLbA3xicU3IwPGQWsCxBu13vit7FK
     }
 }
