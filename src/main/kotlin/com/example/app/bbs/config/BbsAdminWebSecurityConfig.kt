@@ -1,5 +1,6 @@
 package com.example.app.bbs.config
 
+import com.example.app.bbs.app.service.UserDetailsServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -15,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 class BbsAdminWebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Autowired
-    lateinit var passwordEncoder: PasswordEncoder
+    lateinit var userDetailsService: UserDetailsServiceImpl
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {
@@ -24,12 +25,6 @@ class BbsAdminWebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Override
     override fun configure(auth: AuthenticationManagerBuilder) {
-
-        auth.inMemoryAuthentication()
-            .withUser("admin")
-            .password(
-                "\$2a\$10\$qHwwgwxqm5Od7dSdeIE4wu3lhLbA3xicU3IwPGQWsCxBu13vit7FK" // "$"に関してコンパイルエラーが出る場合は、直前に"\"を足してエスケープしても問題ない
-            )
-            .authorities("ROLE_ADMIN")
+        auth.userDetailsService(userDetailsService)
     }
 }
