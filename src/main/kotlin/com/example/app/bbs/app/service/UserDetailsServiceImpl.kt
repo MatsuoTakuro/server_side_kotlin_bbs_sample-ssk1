@@ -8,19 +8,22 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
-@Service
-class UserDetailsServiceImpl : UserDetailsService {
-    @Autowired
-    lateinit var userRepository: UserRepository
 
-    override fun loadUserByUsername(username: String?): UserDetails {
-        var user : User? = null
-        if (username != null) {
-            user = userRepository.findByName(username)
-        }
-        if(user == null) {
-            throw UsernameNotFoundException(username)
-        }
-        return UserDetailsImpl(user)
+@Service
+class UserDetailsServiceImpl: UserDetailsService {
+  @Autowired
+  lateinit var userRepository: UserRepository
+
+  override fun loadUserByUsername(username: String?): UserDetails {
+    var user : User? = null
+    if(username != null) {
+      user = userRepository.findByName(username)
     }
+
+    if(user == null) {
+      throw UsernameNotFoundException(username)
+    }
+
+    return UserDetailsImpl(user)
+  }
 }

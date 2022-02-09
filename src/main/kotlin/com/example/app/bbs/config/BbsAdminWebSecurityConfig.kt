@@ -10,21 +10,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 
-
 @Configuration
 @EnableWebSecurity
 class BbsAdminWebSecurityConfig : WebSecurityConfigurerAdapter() {
 
-    @Autowired
-    lateinit var userDetailsService: UserDetailsServiceImpl
+  @Autowired
+  lateinit var userDetailsService: UserDetailsServiceImpl
 
-    @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
+  @Bean
+  fun passwordEncoder(): PasswordEncoder {
+    return BCryptPasswordEncoder()
+  }
 
-    @Override
-    override fun configure(auth: AuthenticationManagerBuilder) {
-        auth.userDetailsService(userDetailsService)
-    }
+  @Override
+  override fun configure(auth: AuthenticationManagerBuilder) {
+    auth.userDetailsService(userDetailsService)
+  }
+
 }

@@ -32,20 +32,20 @@ class ArticleController {
     @Autowired
     lateinit var articleRepository : ArticleRepository
 
-    @GetMapping("/seed")
-    @ResponseBody
-    fun seed(): String {
-        for (i in 1..50) {
-            var article = Article()
-            article.name = "name_$i"
-            article.title = "title_$i"
-            article.contents = "contents_$i"
-            article.articleKey = "1234"
-            articleRepository.save(article)
-        }
-
-        return "Finish"
-    }
+//    @GetMapping("/seed")
+//    @ResponseBody
+//    fun seed(): String {
+//        for (i in 1..50) {
+//            var article = Article()
+//            article.name = "name_$i"
+//            article.title = "title_$i"
+//            article.contents = "contents_$i"
+//            article.articleKey = "1234"
+//            articleRepository.save(article)
+//        }
+//
+//        return "Finish"
+//    }
 
     @PostMapping("/")
     fun registerArticle(@Validated @ModelAttribute articleRequest: ArticleRequest,
